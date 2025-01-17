@@ -1,0 +1,16 @@
+
+.product-detail {
+  width: 360px;
+  /* min-height: calc(vh - 68px); */
+  margin-top: 68px;
+}
+
+/* Ocultar la barra de scroll */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE y Edge */
+  scrollbar-width: none;     /* Firefox */
+}
