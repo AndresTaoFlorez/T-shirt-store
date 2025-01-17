@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import { totalPrice } from '../utils/index'
+import { filterItems } from '../utils/searchByType'
 const ShoppingCartContext = createContext();
 
 const ShoppingCartProvider = ({ children }) => {
@@ -7,6 +8,8 @@ const ShoppingCartProvider = ({ children }) => {
   // -- Statest -- 
   // -- all items from API
   const [items, setItems] = useState(null)
+  // -- all filtered items from API
+  const [filteredItems, setFilteredItems] = useState(null)
   // - Shopping Cart
   const [shoppingCart, setShoppingCart] = useState([])
   // - Shopping Cart - Show or Hidden
@@ -19,6 +22,11 @@ const ShoppingCartProvider = ({ children }) => {
   const [productToShow, setProductToShow] = useState({})
   // - Product Detail- Show or Hidden
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
+  // - Search by title
+  const [searchByTitle, setSearchByTitle] = useState('')
+  // - Search by title
+  const [searchByCategory, setSearchByCategory] = useState('')
+
 
 
   // -- Handlers and Fcuntions -- 
@@ -31,7 +39,7 @@ const ShoppingCartProvider = ({ children }) => {
 
   // Update Counter
   useEffect(() => {
-    setCounter(shoppingCart.length)
+    setCounter(shoppingCart?.length)
   }, [shoppingCart])
 
 
@@ -68,6 +76,7 @@ const ShoppingCartProvider = ({ children }) => {
   // Add order - handler
   const handleCheckOut = () => {
     const orderToAdd = {
+      id: new Date().getTime(),
       date: new Date().toLocaleDateString(),
       products: shoppingCart,
       totalProducts: shoppingCart.length,
@@ -75,6 +84,15 @@ const ShoppingCartProvider = ({ children }) => {
     }
     setOrder((prev) => ([...prev, orderToAdd]))
     setShoppingCart([])
+  }
+
+  const handleSearchByCategory = (category) => {
+    filterItems({
+      items,
+      input: category,
+      searchType: "By_CATEGORY",
+      setFilteredItems
+    })
   }
 
 
@@ -95,11 +113,11 @@ const ShoppingCartProvider = ({ children }) => {
     setIsProductDetailOpen(false)
   }
 
-
   return (
     <ShoppingCartContext.Provider
       value={{
         items,
+        setItems,
         setCounter,
         counter,
         openProductDetail,
@@ -116,7 +134,14 @@ const ShoppingCartProvider = ({ children }) => {
         isShoppingCartOpen,
         handleDelete,
         handleCheckOut,
-        order
+        order,
+        searchByTitle,
+        setSearchByTitle,
+        filteredItems,
+        setFilteredItems,
+        searchByCategory,
+        setSearchByCategory,
+        handleSearchByCategory
       }}
     >
       {children}

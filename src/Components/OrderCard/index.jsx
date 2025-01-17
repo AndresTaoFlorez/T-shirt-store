@@ -2,7 +2,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 
 const OrderCard = ({ product, handleDelete }) => {
   const { id, title, images: imageUrl, price } = product
-  
+
   const RenderXmarkIcon = () => {
     if (!handleDelete) return null;
     return (

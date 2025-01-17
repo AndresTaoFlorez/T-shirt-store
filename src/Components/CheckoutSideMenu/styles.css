@@ -1,8 +1,7 @@
-
 .shopping-cart {
   width: 360px;
   height: 80vh;
-  margin-top: 68px;
+  margin-top: 100px;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
@@ -10,6 +9,8 @@
 }
 
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE y Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;
+  /* IE y Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }

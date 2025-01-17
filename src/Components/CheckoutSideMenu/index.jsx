@@ -1,10 +1,10 @@
 import { useContext } from 'react';
+import { ShoppingCartContext } from '../../Context';
 import { Link } from 'react-router';
 import { XMarkIcon } from '@heroicons/react/24/solid'
-import { ShoppingCartContext } from '../../Context';
-import './styles.css'
 import OrderCard from '../OrderCard';
 import { totalPrice } from '../../utils';
+import './styles.css'
 
 const CheckoutSideMenu = () => {
   const { isShoppingCartOpen, handleShoppingCartClose, shoppingCart, handleDelete, handleCheckOut } = useContext(ShoppingCartContext)
